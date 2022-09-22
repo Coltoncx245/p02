@@ -28,12 +28,12 @@ void List::Print()
 
 void List::Insert(std::string str)
 {	
-	c = ListContainer(str);
+	ListContainer* c = new ListContainer(str);
 	// If  empty list, set pointers for beginning and end of list to new container
 	if (this->isEmpty)
 	{
-		this->begin = &c;
-		this->end = &c;
+		this->begin = c;
+		this->end = c;
 		this->isEmpty = false;
 	}
 
@@ -42,9 +42,9 @@ void List::Insert(std::string str)
 	else
 	{
 
-		c.previous = this->end;
-		this->end->next = &c;
-		this->end = &c;
+		c->previous = this->end;
+		this->end->next = c;
+		this->end = c;
 		
 	}
 	

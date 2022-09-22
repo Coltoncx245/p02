@@ -35,7 +35,6 @@ struct ListContainer
 
 class List
 {
-	ListContainer c;
 	ListContainer elements[MAX_ARR_SIZE]; // Array holding ListContainer struct for each element
 
 	int count = 0; // Number of elements currently in list

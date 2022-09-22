@@ -11,10 +11,12 @@ int main()
 	
 	testList.Insert("Apple");
 	testList.Insert("Banana");
+	testList.Insert("Cocount");
+	testList.Insert("Djemba");
+	testList.Insert("Eggplant");
 
 
-	std::cout << testList.begin << " " << testList.begin->contents << std::endl;
-	std::cout << testList.end << " " << testList.end->contents << std::endl;
+	testList.Print();
 
 	return 0;
 }
