@@ -8,14 +8,13 @@ int main()
 
 	List testList = List();
 	List secondList = List();
-
-
-	testList.ParseFile("i021.dat");
-	secondList.ParseFile("i022.dat");
-
-	List finalList = testList.CartersianProduct(secondList);
-
-	finalList.Print();
 	
+	testList.Insert("Apple");
+	testList.Insert("Banana");
+
+
+	std::cout << testList.begin << " " << testList.begin->contents << std::endl;
+	std::cout << testList.end << " " << testList.end->contents << std::endl;
+
 	return 0;
 }

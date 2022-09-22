@@ -1,14 +1,25 @@
 #include "List02.h"
 
 
-List::List() { void; };
+List::List() 
+{ 
+	iterator = nullptr;
+	this->begin = nullptr;
+	this->end = nullptr;
+	this->isEmpty = true;
+	
+
+};
 ListContainer::ListContainer() { void; };
 
 void List::Print()
 {
+	ListContainer* iterator = this->begin;
+
 	for (int i = 0; i < this->count; i++)
 	{
-		std::cout << elements[i].contents + "\tIndex: " << elements[i].index << std::endl;
+		std::cout << iterator->contents << std::endl;
+		iterator = iterator->next;
 	}
 	std::cout << "\n" << std::endl;
 }
@@ -17,22 +28,28 @@ void List::Print()
 
 void List::Insert(std::string str)
 {	
-	int index = this->count; // Index AFTER last element of array
-	
-	if (index == MAX_ARR_SIZE)
+	c = ListContainer(str);
+	// If  empty list, set pointers for beginning and end of list to new container
+	if (this->isEmpty)
 	{
-		std::cout << "Error, max number of elements reached." << std::endl;
-
+		this->begin = &c;
+		this->end = &c;
+		this->isEmpty = false;
 	}
 
+	// Otherwise, point new container prev to end of list, then make new container end of list.
+	
 	else
 	{
-		ListContainer c = ListContainer(str, index);
-		this->elements[index] = c;
 
-		// Update number of elements currently in the list
-		this->count++;
+		c.previous = this->end;
+		this->end->next = &c;
+		this->end = &c;
+		
 	}
+	
+	this->count++;
+
 
 }
 

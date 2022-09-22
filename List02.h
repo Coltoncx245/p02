@@ -11,19 +11,23 @@
 struct ListContainer
 {
 	std::string contents;
+	ListContainer* next;
+	ListContainer* previous;
+
+
+
 	int index = 0; // This container's current index in the list
 	bool isEOL = false; // Returns true if this container is the last one in the list
+	bool isBOL = false;// Returns true if this container is the first one in the list
 
 	ListContainer();
 
 	/*Constructs container to be placed in list. 
 	@param str: The string element held in the container 
-	@param idx: The index of the list in which the struct is being placed
 	*/ 
-	ListContainer(std::string str, int idx)
+	ListContainer(std::string str)
 	{
 		this->contents = str;
-		this->index = idx;
 	}
 
 };
@@ -31,12 +35,18 @@ struct ListContainer
 
 class List
 {
-
+	ListContainer c;
 	ListContainer elements[MAX_ARR_SIZE]; // Array holding ListContainer struct for each element
+
 	int count = 0; // Number of elements currently in list
 	
 
 public:
+
+	ListContainer* iterator; // Points to currently accessed element of list
+	ListContainer* begin; // Points to the first container in the list
+	ListContainer* end; // Points to the last container in the list
+	bool isEmpty = true;
 
 	List();
 
