@@ -9,14 +9,11 @@ int main()
 	List testList = List();
 	List secondList = List();
 	
-	testList.Insert("Apple");
-	testList.Insert("Banana");
-	testList.Insert("Cocount");
-	testList.Insert("Djemba");
-	testList.Insert("Eggplant");
+	testList.ParseFile("i021.dat");
+	secondList.ParseFile("i022.dat");
 
-
-	testList.Print();
+	List result = testList.CartersianProduct(secondList);
+	result.Print();
 
 	return 0;
 }

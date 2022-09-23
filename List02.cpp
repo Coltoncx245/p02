@@ -3,14 +3,18 @@
 
 List::List() 
 { 
-	iterator = nullptr;
 	this->begin = nullptr;
 	this->end = nullptr;
 	this->isEmpty = true;
 	
 
 };
-ListContainer::ListContainer() { void; };
+
+ListContainer::ListContainer() 
+{
+	this->next = nullptr;
+	this->previous = nullptr;
+};
 
 void List::Print()
 {
@@ -25,10 +29,10 @@ void List::Print()
 }
 
 
-
 void List::Insert(std::string str)
 {	
 	ListContainer* c = new ListContainer(str);
+
 	// If  empty list, set pointers for beginning and end of list to new container
 	if (this->isEmpty)
 	{
@@ -37,8 +41,7 @@ void List::Insert(std::string str)
 		this->isEmpty = false;
 	}
 
-	// Otherwise, point new container prev to end of list, then make new container end of list.
-	
+	// Otherwise, point new container.previous to end of list, then make new container end of list.
 	else
 	{
 
@@ -48,8 +51,8 @@ void List::Insert(std::string str)
 		
 	}
 	
+	// Increment count to keep track of number of elements in list
 	this->count++;
-
 
 }
 
@@ -58,40 +61,50 @@ List List::CartersianProduct(List l)
 {
 	List productList = List();
 
+	ListContainer* iterator1 = this->begin; // Iterator for list 1
+	ListContainer* iterator2 = l.begin; // Iterator for list 2
+
+
 	for (int i = 0; i < this->count; i++)
 	{
-		for (int p = 0; p < l.count; p++)
+		for (int x = 0; x < l.count; x++)
 		{
-			productList.Insert("{" + this->elements[i].contents + ", " + l.elements[p].contents + "}");
+			// Insert element pair
+			productList.Insert("(" + iterator1->contents + "," + iterator2->contents + ')');
+
+			// advance second list iterator
+			if (iterator2 != l.end) iterator2 = iterator2->next;
 		}
-		
+		// advance first list iterator
+		if (iterator1 != this->end) iterator1 = iterator1->next;
+
+		// reset second list iterator to beginning of list
+		iterator2 = l.begin;
 	}
 
 	return productList;
-
 }
 
 void List::ParseFile(std::string fileName)
-{
-	std::ifstream inputFile = std::ifstream(fileName);
+{	
 	
-	while (inputFile)
-	{
-		std::string line;
-		getline(inputFile, line);
 
-		// Iterate through line, adding non-whitespace chars to list
-		
-		for (char &c : line)
+		std::ifstream inputFile = std::ifstream(fileName);
+		// catch errors in file input
+
+		if (inputFile.fail())
 		{
-			if (c != ' ' && c != '\t')
-			{
-				this->Insert(std::string(1, c));
-			}
-				
+			std::cout << "Error: Could not find file " << fileName << std::endl;
 		}
-		
-	}
+		while (inputFile)
+		{
+			std::string w;
+			while (inputFile >> w)
+			{
+				this->Insert(w);
+			}
+		}
+
 
 }
 

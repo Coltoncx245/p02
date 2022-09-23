@@ -3,16 +3,14 @@
 #include <fstream>
 #include <iostream>
 
-// Maximum number of elements in the array
-#define MAX_ARR_SIZE 50
 
-
-// Container struct holding string, bool if EOL
+// Container struct holding string and pointers to next and previous containers in list
 struct ListContainer
 {
-	std::string contents;
-	ListContainer* next;
-	ListContainer* previous;
+						
+	std::string contents; // String contents of the container
+	ListContainer* next; // Pointer to the next container in the list
+	ListContainer* previous; // Pointer to the previous container in the list
 
 
 
@@ -20,6 +18,7 @@ struct ListContainer
 	bool isEOL = false; // Returns true if this container is the last one in the list
 	bool isBOL = false;// Returns true if this container is the first one in the list
 
+	// Default constructor
 	ListContainer();
 
 	/*Constructs container to be placed in list. 
@@ -35,14 +34,10 @@ struct ListContainer
 
 class List
 {
-	ListContainer elements[MAX_ARR_SIZE]; // Array holding ListContainer struct for each element
-
 	int count = 0; // Number of elements currently in list
-	
 
 public:
 
-	ListContainer* iterator; // Points to currently accessed element of list
 	ListContainer* begin; // Points to the first container in the list
 	ListContainer* end; // Points to the last container in the list
 	bool isEmpty = true;
@@ -55,11 +50,14 @@ public:
 	// Add new string element to end of list
 	void Insert(std::string str);
 
+	// Creates a new list of the cartesian product of two lists
 	//@returns a list of the cartesian product of the current list and param list
 	List CartersianProduct(List l);
 
+	// Reads strings from input file into list
+	//@param fileName: Name of file in local dir to read
+	//@returns Void
 	void ParseFile(std::string fileName);
-
 
 
 };
