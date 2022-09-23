@@ -148,6 +148,7 @@
   <ItemGroup>
     <None Include="i021.dat" />
     <None Include="i022.dat" />
+    <None Include="o02.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

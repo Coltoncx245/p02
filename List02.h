@@ -54,10 +54,19 @@ public:
 	//@returns a list of the cartesian product of the current list and param list
 	List CartersianProduct(List l);
 
+	// Creates a new list of the cartesian product of two lists and writes the results to a file
+	//@returns a list of the cartesian product of the current list and param list
+	List CartersianProduct(List l, std::string outputFileName);
+
 	// Reads strings from input file into list
 	//@param fileName: Name of file in local dir to read
 	//@returns Void
 	void ParseFile(std::string fileName);
+
+
+	// Writes contents of list to string
+	//@returns formatted string of all elements in list
+	std::string ToString();
 
 
 };

@@ -85,6 +85,43 @@ List List::CartersianProduct(List l)
 	return productList;
 }
 
+List List::CartersianProduct(List l, std::string outputFileName)
+{
+
+	List productList = List();
+
+	ListContainer* iterator1 = this->begin; // Iterator for list 1
+	ListContainer* iterator2 = l.begin; // Iterator for list 2
+
+
+	for (int i = 0; i < this->count; i++)
+	{
+		for (int x = 0; x < l.count; x++)
+		{
+			// Insert element pair
+			productList.Insert("(" + iterator1->contents + "," + iterator2->contents + ')');
+
+			// advance second list iterator
+			if (iterator2 != l.end) iterator2 = iterator2->next;
+		}
+		// advance first list iterator
+		if (iterator1 != this->end) iterator1 = iterator1->next;
+
+		// reset second list iterator to beginning of list
+		iterator2 = l.begin;
+	}
+
+	std::ofstream outputFile(outputFileName);
+
+
+	outputFile << "M: " + this->ToString() + "\n";
+	outputFile << "N: " + l.ToString() + "\n";
+	outputFile << "M x N: " + productList.ToString() + "\n";
+
+	std::cout << "List data successfully written to file " << outputFileName << std::endl;
+	return productList;
+}
+
 void List::ParseFile(std::string fileName)
 {	
 	
@@ -104,7 +141,31 @@ void List::ParseFile(std::string fileName)
 				this->Insert(w);
 			}
 		}
+}
 
+std::string List::ToString()
+{
+	std::string resultString = "{";
 
+	ListContainer* iterator = this->begin;
+
+	for (int i = 0; i < this->count; i++)
+	{
+
+		if (iterator != this->end) // Don't put a comma after the last element in the list
+		{
+			resultString += iterator->contents + ", ";
+			iterator = iterator->next;
+		}
+
+		else
+		{
+			resultString += iterator->contents;
+			iterator = iterator->next;
+		}
+		
+	}
+	resultString += "}";
+	return resultString;
 }
 
